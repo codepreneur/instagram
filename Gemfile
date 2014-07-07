@@ -31,6 +31,7 @@ gem 'paperclip', github: 'thoughtbot/paperclip'
 group :test, :development do
 	gem 'rspec-rails'
 	gem 'capybara'
+	gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password
