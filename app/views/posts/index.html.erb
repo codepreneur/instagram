@@ -1,7 +1,7 @@
 <% if @posts.any? %>
 	<% @posts.each do |post| %>
 	<% if post.image.present? %>
-		<%= image_tag post.image.url, class: 'uploaded-pic' %>
+		<%= image_tag post.image.url(:thumb), class: 'uploaded-pic' %>
 	<% end %>
 	<h2><%= post.title %></h2> <br />
 	<p><%= post.description %></p>
