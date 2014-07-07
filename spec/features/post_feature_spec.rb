@@ -3,6 +3,12 @@ require 'rails_helper'
 describe "Posts" do
 	
 	context "no posts" do
+
+		before do
+		  user = User.create email: 'tansaku@gmail.com', password: '12345678', password_confirmation: '12345678'
+		  login_as user
+		end
+
 		it "should have no posts when initialized" do
 			visit '/posts'
 			expect(page).to have_content 'No posts yet'
@@ -30,10 +36,7 @@ describe "creating posts" do
 
 	context "logged in" do
 
-	before do
-	  user = User.create email: 'tansaku@gmail.com', password: '12345678', password_confirmation: '12345678'
-	  login_as user
-	end
+	
 
 		it "can add a post" do
 			visit '/posts/new'
