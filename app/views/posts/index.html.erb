@@ -1,8 +1,16 @@
 <% if @posts.any? %>
 	<% @posts.each do |post| %>
-	<%= post.title %> <br />
-	<%= post.description %>
+	<% if post.image.present? %>
+		<%= image_tag post.image.url, class: 'uploaded-pic' %>
 	<% end %>
+	<h2><%= post.title %></h2> <br />
+	<p><%= post.description %></p>
+	<% end %>
+
+<% else %>
+	<h1>No posts yet</h1>	
 <% end %>
 
-<h1>No posts yet</h1>
+<%= link_to "New post", new_post_path %>
+
+
