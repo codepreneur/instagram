@@ -28,6 +28,12 @@ end
 
 describe "creating posts" do
 
+	context "logged in" do
+
+	before do
+	  user = User.create email: 'tansaku@gmail.com', password: '12345678', password_confirmation: '12345678'
+	  login_as user
+	end
 
 		it "can add a post" do
 			visit '/posts/new'
@@ -53,7 +59,22 @@ describe "creating posts" do
 			expect(page).to have_css 'img.uploaded-pic'
 		end	
 
+	end
 
+
+	# context "logged out" do
+
+	# 	it "can add a post" do
+	# 		visit '/posts/new'
+
+	# 	end	
+
+	# 	it "can upload the photo" do
+	# 		visit '/posts/new'
+
+	# 	end	
+
+	# end
 
 end
 
