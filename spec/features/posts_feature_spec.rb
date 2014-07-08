@@ -12,7 +12,10 @@ describe "Posts" do
 
 	context "has posts" do
 
-		before {Post.create title: 'Cool post', description: 'Hello world'}
+		before do 
+			alex = User.create(email: 'alex@example.com', password: '12345678', password_confirmation: '12345678')
+			alex.posts.create title: 'Cool post', description: 'Hello world'
+		end
 		it "displays posts" do
 			visit '/posts'
 			expect(page).to have_content "Cool post"
@@ -43,6 +46,7 @@ describe "creating posts" do
 			expect(current_path).to eq posts_path
 			expect(page).to have_content 'Cool post'
 			expect(page).to have_content 'This is cool description'
+			expect(page).to have_content 'Posted by: alex@example.com'
 			expect(page).not_to have_css 'img.uploaded-pic'
 		end	
 
