@@ -28,13 +28,19 @@ end
 
 describe "creating posts" do
 
+	context "when logged in" do
+
+		before do
+			alex = User.create(email: 'alex@example.com', password: '12345678', password_confirmation: '12345678')
+			login_as alex
+		end
 
 		it "can add a post" do
 			visit '/posts/new'
 			fill_in 'Title', with: 'Cool post'
 			fill_in 'Description', with: 'This is cool description'
 			click_button "Post it!"
-			expect(current_path).to eq '/posts'
+			expect(current_path).to eq posts_path
 			expect(page).to have_content 'Cool post'
 			expect(page).to have_content 'This is cool description'
 			expect(page).not_to have_css 'img.uploaded-pic'
@@ -52,6 +58,18 @@ describe "creating posts" do
 			expect(page).to have_content 'This is cool description'
 			expect(page).to have_css 'img.uploaded-pic'
 		end	
+
+	end
+
+
+	context "when logged out" do
+		it "is impossible" do
+			visit '/posts'
+			click_link 'New post'
+			
+			expect(page).not_to have_field 'Title'
+		end	
+	end
 
 
 
