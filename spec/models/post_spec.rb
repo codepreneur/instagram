@@ -38,7 +38,7 @@ RSpec.describe Post, :type => :model do
 				post.tag_names = '#yolo'
 
 				expect(post.tags).to include existing_tag
-				expect(Tag.count).to eq 1
+				expect(Tag.count).to eq 1  
 			end
 		end
 
