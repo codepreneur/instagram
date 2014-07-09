@@ -12,4 +12,11 @@ class Post < ActiveRecord::Base
 	validates_attachment_content_type :image, :content_type => /\Aimage\/.*\z/
 
 	belongs_to :user
+
+	def tag_names
+	end
+
+	def tag_names=(tag_list)
+	end
+
 end
