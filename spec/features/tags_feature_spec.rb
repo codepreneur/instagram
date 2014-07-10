@@ -4,10 +4,13 @@ describe "tagging posts" do
 	
 	context "when logged in" do
 
-		before do
-			alex = User.create(email: 'alex@example.com', password: '12345678', password_confirmation: '12345678')
-			login_as alex
-		end
+    let!(:alex) do
+      User.create(email: 'alex@example.com', password: '12345678', password_confirmation: '12345678')
+    end
+
+    before do
+      login_as alex
+    end
 
 		it "can add a post" do
 			visit '/posts/new'
@@ -19,6 +22,8 @@ describe "tagging posts" do
 			expect(page).to have_link '#yolo'
 			expect(page).to have_link '#swag'
 		end	
+
+
 
 		it "can upload the photo" do
 			visit '/posts/new'
@@ -32,6 +37,31 @@ describe "tagging posts" do
 			expect(page).to have_content 'This is cool description'
 			expect(page).to have_css 'img.uploaded-pic'
 		end	
+
+		context "existing posts" do
+
+			before do 
+        alex.posts.create title: 'Pic1', tag_names: 'yolo'
+        alex.posts.create title: 'Pic2', tag_names: 'swag'
+
+        visit '/posts'
+      end
+
+      it 'should filter posts by selected tag' do
+
+        click_link 'yolo'
+        expect(page).to have_css 'h1', 'posts associated with yolo'
+        expect(page).to have_content 'Pic1'
+        expect(page).not_to have_content 'Pic2'
+      end 
+
+      it 'uses the tag name in the url' do
+        click_link 'yolo'
+
+        expect(current_path).to eq '/tags/yolo'
+      end
+
+		end
 
 	end
 

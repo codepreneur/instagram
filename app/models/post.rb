@@ -14,13 +14,17 @@ class Post < ActiveRecord::Base
 	belongs_to :user
 	has_and_belongs_to_many :tags
 
+	def to_param
+		title
+	end
+
 	def tag_names
 		# tags.map(&:name).join(', ')
 	end
 
 	def tag_names=(tag_list)
 		# self.tags << Tag.create(name: tag_list)
-		tag_list.split(', ').each do |tag|
+		tag_list.split(/\s,?/).each do |tag|
 			tags << Tag.find_or_create_by(name: tag)
 		end
 	end

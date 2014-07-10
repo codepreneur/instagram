@@ -42,6 +42,7 @@ describe "creating posts" do
 			visit '/posts/new'
 			fill_in 'Title', with: 'Cool post'
 			fill_in 'Description', with: 'This is cool description'
+			fill_in 'Address', with: '25 City Road, London'
 			click_button "Post it!"
 			expect(current_path).to eq posts_path
 			expect(page).to have_content 'Cool post'

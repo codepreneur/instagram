@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
 
-	before_action :authenticate_user!, except: [:index]
+	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
-		@posts = Post.all
+		@posts = Post.all.order(created_at: :desc)
+	end
+
+	def show
+		@post = Post.find_by_title params[:id]
 	end
 
 	def new
@@ -11,7 +15,7 @@ class PostsController < ApplicationController
 	end
 
 	def create
-		@post = Post.new(params[:post].permit(:title, :description, :image, :tag_names ))
+		@post = Post.new(params[:post].permit(:title, :description, :image, :tag_names, :address ))
 		@post.user = current_user
 		@post.save!
 
