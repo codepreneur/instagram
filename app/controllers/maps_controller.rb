@@ -1,7 +1,7 @@
 class MapsController < ApplicationController
 
 	def show
-		@post = Post.find params[:post_id]
+		@post = Post.find_by title: params[:post_id]
 	end
 
 end
