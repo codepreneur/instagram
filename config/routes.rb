@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-
-  #get 'products/:id' => 'catalog#view'
   devise_for :users
+  devise_for :admins
+  #get 'products/:id' => 'catalog#view'
+  
   root to: 'posts#index'
 
   resources :posts do
