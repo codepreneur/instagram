@@ -1,6 +1,7 @@
 class Order < ActiveRecord::Base
   belongs_to :user
   belongs_to :post
+  after_create :send_confirmation_email
 
 
   def number
@@ -9,5 +10,9 @@ class Order < ActiveRecord::Base
 
     date_section + number_section
   end
-  
+
+  def send_confirmation_email
+    OrderMailer.confirmation(self).deliver
+  end
+
 end

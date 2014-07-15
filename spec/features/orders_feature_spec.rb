@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe 'orders page' do
 
-  let(:post){Post.new title: 'Pretty picture'}
-  let(:user){User.new email: 'customer@blah.com', password: '12345678', password_confirmation: '12345678'}
-  let(:admin){Admin.new email: 't@t.com', password: '12345678', password_confirmation: '12345678'}
+  let(:post){Post.create title: 'Pretty picture'}
+  let(:user){User.create email: 'customer@blah.com', password: '12345678', password_confirmation: '12345678'}
+  let(:admin){Admin.create email: 't@t.com', password: '12345678', password_confirmation: '12345678'}
 
   context 'logged in as an admin' do
     before do
@@ -38,4 +38,22 @@ describe 'orders page' do
       expect(page).to have_content 'Sign in'
     end
   end
+
+  describe 'email confirmation' do
+    before do
+      clear_emails
+    end
+
+    it 'is sent when an order is created' do
+      Order.create(post: post, user: user)
+      open_email('customer@blah.com')
+      expect(current_email).to have_content 'Order successful!'
+      expect(current_email.subject).to eq 'You just ordered a print of Pretty picture'
+    end
+  end
+  
 end
+
+
+
+
