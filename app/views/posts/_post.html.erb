@@ -7,6 +7,7 @@
        <% if post.image.present? %>
          <%= image_tag post.image.url(:thumb), class: 'uploaded-pic' %>
        <% end %>
+       <p><%= link_to 'Buy', new_post_charge_path(post) , class: 'btn btn-success'%></p>
        <p><%= post.description %></p>
        <p>
          <% post.tags.each do |tag| %>
