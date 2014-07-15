@@ -18,7 +18,7 @@ describe 'orders page' do
     end
     context 'an order' do
       before do
-        Order.create post: post, user: user
+        Order.create id: 1, post: post, user: user, created_at: Date.new(2013, 12, 25)
         visit '/orders'
       end
       it 'should display title of post' do
@@ -26,6 +26,9 @@ describe 'orders page' do
       end
       it 'should display the customer email' do
         expect(page).to have_content 'customer@blah.com'
+      end
+      it 'displays an order number' do
+        expect(page).to have_content '2512130001'
       end
     end
   end

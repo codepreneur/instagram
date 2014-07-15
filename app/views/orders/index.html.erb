@@ -5,7 +5,8 @@ No orders yet :-(
   <ol>
   <% @orders.each do |order|%>
     <li><%= order.post.title %>
-    <%= order.user.email %></li>
+    <%= order.user.email %>
+    <%= order.number %></li>
   <% end %>
 </ol>
 <% end %>
