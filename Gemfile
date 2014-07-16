@@ -34,6 +34,7 @@ gem 'heroku_secrets', github: 'alexpeattie/heroku_secrets'
 gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
 gem 'websocket-rails'
 gem 'thin'
+gem 'factory_girl_rails'
 
 group :test, :development do
 	gem 'rspec-rails'

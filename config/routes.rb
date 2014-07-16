@@ -9,6 +9,9 @@ Rails.application.routes.draw do
     resource :map
     resources :charges
     resources :likes
+    resources :comments do
+      resources :likes
+    end
   end
 
   resources :tags

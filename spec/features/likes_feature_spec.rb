@@ -14,7 +14,16 @@ describe 'liking posts' do
   it 'increments the like count of a post', js: true do
     visit '/posts'
     click_link '♥ 0'
+    # sleep 2
     expect(page).to have_content '♥ 1'
+  end
+
+  it 'can only be liked once per user', js: true do
+  	
+    visit '/posts'
+    click_link '♥ 0'
+    click_link '♥ 1'
+    expect(page).to have_link '♥ 1'
   end
 
 end
