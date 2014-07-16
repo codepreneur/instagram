@@ -17,6 +17,7 @@
        <% unless post.address.blank? %>
          <%= link_to 'Map', post_map_path(post), class: 'btn btn-success' %>
        <% end %>
+         <%= link_to "♥ #{post.likes.count}", post_likes_path(post), data: {'post-id' => post.id}, class: 'btn btn-danger like-btn' %>
      </div>
  
      <div class="panel-footer">Posted by: <%= post.user.email %></div>

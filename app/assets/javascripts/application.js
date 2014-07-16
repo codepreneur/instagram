@@ -15,4 +15,6 @@
 //= require bootstrap-sprockets
 //= require bootstrap-tagsinput
 //= require gmaps
+//= require websocket_rails/main
 //= require_tree .
+
