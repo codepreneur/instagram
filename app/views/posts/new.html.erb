@@ -1,22 +1,43 @@
 <%= form_for @post, html: {multipart: true} do |f| %>
 
 	<%= f.label :title %>
-	<%= f.text_field :title %>
+	<%= f.text_field :title, 'ng-model'=>'title' %>
 
 
 	<%= f.label :description %>
-	<%= f.text_area :description %>
+	<%= f.text_area :description, 'ng-model'=>'description' %>
 
 	<%= f.label :image %>
 	<%= f.file_field :image %>
 
 	<%= f.label :address %>
-	<%= f.text_field :address %>
+	<%= f.text_field :address, 'ng-model'=>'address' %>
 
 	<%= f.label :tag_names, 'Tags' %>
-	<%= f.text_field :tag_names, data: {role: 'tagsinput'} %>
+	<%= f.text_field :tag_names, 'ng-model'=>'tags', data: {role: 'tagsinput'} %>
 
 	<%= f.submit 'Post it!' %>
 
 <% end %>
 
+
+	<h1>Post Preview</h1>
+ 
+   <div class='col-sm-4'>
+     <div class="panel panel-default">
+       <div class="panel-heading">
+         <h3 class="panel-title">{{ title }}</h3>
+       </div>
+       <div class="panel-body">
+ 
+         <p>{{ description }}</p>
+         <p>
+           {{ tags }}
+         </p>
+       </div>
+ 
+       <div class="panel-footer">Posted by: <%= current_user.email %></div>
+     </div>
+   </div>
+
+ </div>

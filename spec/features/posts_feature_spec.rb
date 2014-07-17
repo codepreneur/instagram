@@ -19,7 +19,7 @@ describe "Posts" do
 		it "displays posts" do
 			visit '/posts'
 			expect(page).to have_content "Cool post"
-			expect(page).to have_content 'Hello world'
+			expect(page).to have_content "Hello world"
 
 		end
 
